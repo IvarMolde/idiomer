@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lær Norske Idiomer - Molde vo</title>
+    <style>
+        :root {
+            --primary: #005a9c;
+            --primary-dark: #004477;
+            --secondary: #eef2ff;
+            --success: #2d7a2d;
+            --error: #b91c1c;
+            --text: #1f2937;
+            --white: #ffffff;
+            --border: #d1d5db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 2.5rem 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background: var(--white);
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            border-bottom: 4px solid transparent;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            transition: 0.3s;
+        }
+
+        nav button.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+        }
+
+        main {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            display: none;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .info-box {
+            background: var(--secondary);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .idiom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .idiom-card {
+            border: 1px solid var(--border);
+            padding: 1.2rem;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .idiom-card strong {
+            color: var(--primary);
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-card {
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            background: #fff;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 14px;
+            margin: 10px 0;
+            border: 2px solid var(--border);
+            background: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background-color: #f8fafc;
+        }
+
+        .option-btn.correct {
+            background-color: #dcfce7;
+            border-color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background-color: #fee2e2;
+            border-color: var(--error);
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        .ndla-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .ndla-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        @media (max-width: 600px) {
+            nav button { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Norske idiomer</h1>
+    <p>Molde voksenopplæringssenter</p>
+</header>
+
+<nav role="navigation">
+    <button onclick="showSection('intro')" id="btn-intro" class="active">1. Hva er et idiom?</button>
+    <button onclick="showSection('liste')" id="btn-liste">2. Ordliste</button>
+    <button onclick="showSection('oppgaver')" id="btn-oppgaver">3. Oppgaver</button>
+</nav>
+
+<main>
+    <!-- DEL 1: INTRODUKSJON -->
+    <section id="intro" class="section active">
+        <h2>Å forstå mer enn bare ordene</h2>
+        <p>Et <strong>idiom</strong> er et fast uttrykk der den egentlige betydningen er forskjellig fra de ordene som brukes bokstavelig. For eksempel betyr ikke "å tråkke i salaten" at du faktisk står med føttene i en matrett!</p>
+        
+        <div class="info-box">
+            <h3>Hvorfor er det vanskelig å oversette?</h3>
+            <p>Det er ofte umulig å oversette et idiom direkte til et annet språk. Her er to grunner:</p>
+            <ul>
+                <li><strong>Kontekst:</strong> Du må kjenne situasjonen og den norske kulturen for å forstå hva som menes.</li>
+                <li><strong>Oversettelsesprogrammer:</strong> Google Translate og andre programmer forstår ofte ikke idiomer. De oversetter ofte ord for ord, og da blir meningen helt feil.</li>
+            </ul>
+        </div>
+
+        <h3>Eksempler:</h3>
+        <ul>
+            <li><em>"Å være i samme båt"</em> (Å ha samme problem som andre).</li>
+            <li><em>"Å snakke om sola"</em> (Når man snakker om noen, og de plutselig kommer).</li>
+        </ul>
+
+        <p>Vil du lese mer? Her er den offisielle siden om idiomer fra NDLA:</p>
+        <a href="https://ndla.no/nb/r/norsk-kort-botid-yf/idiomer/b10b00afe8" target="_blank" rel="noopener" class="ndla-button">
+            Gå til NDLA - Idiomer
+        </a>
+    </section>
+
+    <!-- DEL 2: ORDLISTE -->
+    <section id="liste" class="section">
+        <h2>De 10 idiomene du skal lære</h2>
+        <p>Gå gjennom disse forklaringene før du starter på oppgavene.</p>
+        
+        <div class="idiom-grid">
+            <div class="idiom-card"><strong>Å være midt i smørøyet</strong> Å være på et helt perfekt eller ideelt sted.</div>
+            <div class="idiom-card"><strong>Å tråkke i salaten</strong> Å gjøre en pinlig feil eller en sosial tabbe.</div>
+            <div class="idiom-card"><strong>Å være helt på bærtur</strong> Å ha misforstått noe totalt eller ta helt feil.</div>
+            <div class="idiom-card"><strong>Å svelge en kamel</strong> Å godta noe man egentlig er imot eller misliker sterkt.</div>
+            <div class="idiom-card"><strong>Å ta det for god fisk</strong> Å tro på noe uten å sjekke om det faktisk er sant.</div>
+            <div class="idiom-card"><strong>Å ha det som plommen i egget</strong> Å ha det ekstremt komfortabelt, trygt og godt.</div>
+            <div class="idiom-card"><strong>Å male fanden på veggen</strong> Å være altfor pessimistisk og tro at det verste skal skje.</div>
+            <div class="idiom-card"><strong>Å kjøpe katta i sekken</strong> Å bli lurt når man kjøper noe (varen er dårlig).</div>
+            <div class="idiom-card"><strong>Å snakke rett fra levera</strong> Å si meningen sin helt ærlig og direkte.</div>
+            <div class="idiom-card"><strong>Å kaste inn håndkleet</strong> Å gi opp noe man har prøvd å få til.</div>
+        </div>
+    </section>
+
+    <!-- DEL 3: OPPGAVER -->
+    <section id="oppgaver" class="section">
+        <h2>Test deg selv</h2>
+        <p>Velg riktig svar for hver oppgave. Lykke til!</p>
+
+        <div id="quiz-area">
+            <!-- Oppgavene genereres av JavaScript for å sikre 3 alternativer hver -->
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Norskopplæring for voksne. Designet etter universell utforming (WCAG).</p>
+</footer>
+
+<script>
+    const oppgaverData = [
+        {
+            q: "Hva betyr det å være 'midt i smørøyet'?",
+            options: ["Å like å spise smør.", "Å være på et helt perfekt sted.", "Å være veldig sulten."],
+            correct: 1
+        },
+        {
+            q: "Hvis du 'tråkker i salaten', hva har skjedd?",
+            options: ["Du har ødelagt middagen.", "Du har gjort en pinlig feil.", "Du har kjøpt sunn mat."],
+            correct: 1
+        },
+        {
+            q: "Hva betyr det å være 'helt på bærtur'?",
+            options: ["Å ha misforstått noe helt.", "Å være flink til å finne bær.", "Å gå en tur i skogen."],
+            correct: 0
+        },
+        {
+            q: "Hva gjør du når du må 'svelge en kamel'?",
+            options: ["Du spiser mye mat.", "Du reiser til utlandet.", "Du må godta noe du misliker."],
+            correct: 2
+        },
+        {
+            q: "Å 'ta noe for god fisk' betyr at du:",
+            options: ["Tror på det uten å sjekke om det er sant.", "Liker å fiske i sjøen.", "Kjøper billig mat i butikken."],
+            correct: 0
+        },
+        {
+            q: "Å ha det som 'plommen i egget' betyr:",
+            options: ["At man må lage mat.", "At man har det veldig trygt og godt.", "At man er syk."],
+            correct: 1
+        },
+        {
+            q: "Hva gjør man når man 'maler fanden på veggen'?",
+            options: ["Man pusser opp huset.", "Man er veldig flink til å male.", "Man er altfor pessimistisk."],
+            correct: 2
+        },
+        {
+            q: "Hva betyr det å 'kjøpe katta i sekken'?",
+            options: ["Å bli lurt i en handel.", "Å kjøpe et nytt kjæledyr.", "Å glemme igjen posen i butikken."],
+            correct: 0
+        },
+        {
+            q: "Å 'snakke rett fra levera' betyr å:",
+            options: ["Snakke om medisin og helse.", "Si meningen sin helt direkte.", "Snakke veldig sakte."],
+            correct: 1
+        },
+        {
+            q: "Hva gjør du hvis du 'kaster inn håndkleet'?",
+            options: ["Du begynner å vaske klær.", "Du går for å bade.", "Du gir opp."],
+            correct: 2
+        }
+    ];
+
+    function showSection(sectionId) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        document.getElementById('btn-' + sectionId).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    function generateQuiz() {
+        const quizArea = document.getElementById('quiz-area');
+        oppgaverData.forEach((data, index) => {
+            const card = document.createElement('div');
+            card.className = 'quiz-card';
+            
+            const questionText = document.createElement('h3');
+            questionText.innerText = `${index + 1}. ${data.q}`;
+            card.appendChild(questionText);
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            feedback.id = `feedback-${index}`;
+
+            data.options.forEach((opt, optIndex) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => {
+                    // Fjern gamle farger i denne oppgaven
+                    card.querySelectorAll('.option-btn').forEach(b => {
+                        b.classList.remove('correct', 'wrong');
+                    });
+
+                    if (optIndex === data.correct) {
+                        btn.classList.add('correct');
+                        feedback.innerText = "✅ Riktig!";
+                        feedback.style.color = "var(--success)";
+                    } else {
+                        btn.classList.add('wrong');
+                        feedback.innerText = "❌ Feil. Prøv igjen.";
+                        feedback.style.color = "var(--error)";
+                    }
+                };
+                card.appendChild(btn);
+            });
+
+            card.appendChild(feedback);
+            quizArea.appendChild(card);
+        });
+    }
+
+    // Start programmet
+    window.onload = generateQuiz;
+</script>
+
+</body>
+</html>
+```
